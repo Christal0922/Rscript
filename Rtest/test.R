@@ -1,0 +1,8 @@
+library(dplyr)
+d <- T_merge %>% arrange(Predict_celltype)
+d1 <- reshape2::melt(d,genename=c("ATF3","SOX11","SPRR1A"))
+ggplot(d1,aes(x=SeqID,y=variable,fill=value))+geom_tile()
+ggplot(d1,aes(x=SeqID,y=variable,fill=value))+geom_raster()
+ggplot(d1,aes(x=SeqID,y=1,fill=Predict_celltype))+geom_raster()
+library(pheatmap)
+pheatmap(t(d[,4:6]))
